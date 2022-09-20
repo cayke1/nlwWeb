@@ -22,7 +22,7 @@ interface Game {
 function App() {
   const [games, setGames] = useState<Game[]>([]);
   useEffect(() => {
-    fetch('http://localhost:3333/games')
+    fetch(`${import.meta.env.VITE_API_URL}/games`)
       .then(response => response.json())
       .then(data => {
         setGames(data)
