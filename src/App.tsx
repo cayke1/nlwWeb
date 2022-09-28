@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import * as Dialog from "@radix-ui/react-dialog"
+import * as Dialog from "@radix-ui/react-dialog";
 
 import './styles/main.css';
 
@@ -19,15 +19,19 @@ interface Game {
     ads: number,
   }
 }
+
 function App() {
   const [games, setGames] = useState<Game[]>([]);
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/games`)
-      .then(response => response.json())
-      .then(data => {
-        setGames(data)
-      })
-  }, [])
+  
+
+
+    useEffect(() => {
+      fetch(`${import.meta.env.VITE_API_URL}/games`)
+        .then(response => response.json())
+        .then(data => {
+          setGames(data)
+        })
+    }, []);
 
   return (
     <div className="max-w-[1344px] mx-auto flex flex-col items-center my-20">
@@ -40,12 +44,14 @@ function App() {
       <div className="grid grid-cols-6 gap-6 mt-16">
         {games.map(game => {
           return (
+            <Dialog.Root key={game.id}>
             <GameBanner
-              key={game.id} 
+              id={game.id}
               bannerUrl={game.bannerUrl}
               title={game.title}
               adsCount={game._count.ads}
             />
+            </Dialog.Root>
           )
         })}
       </div>

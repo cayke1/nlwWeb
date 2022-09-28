@@ -1,17 +1,55 @@
+import * as Dialog from "@radix-ui/react-dialog";
+import { useEffect, useState } from "react";
 interface GameBannerProps {
+    id: string;
     bannerUrl: string;
     title: string;
     adsCount: number;
 }
 
-export function GameBanner (props: GameBannerProps) {
+interface GameAds {
+  id: string,
+  name: string,
+  weekDays: [],
+  useVoiceChannel: boolean,
+  yearsPlaying: number,
+  hourStart: string,
+  hourEnd: string
+}
+
+export function GameBanner ({bannerUrl, title, adsCount, id}: GameBannerProps) {
+  const [gameAds, setGameAds] = useState<GameAds[]>([]);
+
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/games/${id}/ads`)
+    .then(response => response.json())
+    .then(data => {
+      setGameAds(data)
+      console.log(data)
+    })
+  }, []); 
     return (
-        <a href="" className="relative rounded-lg overflow-hidden">
-          <img src={props.bannerUrl} alt="" />
+      <>
+        <Dialog.Trigger className="relative rounded-lg overflow-hidden">
+          <img src={bannerUrl} alt="" />
           <div className="w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0">
-            <span className="font-bold text-white block">{props.title}</span>
-            <span className="text-zinc-300 text-sm">{props.adsCount} anúncio(s)</span>
+            <span className="font-bold text-white block">{title}</span>
+            <span className="text-zinc-300 text-sm">{adsCount} anúncio(s)</span>
           </div>
-        </a>
+        </Dialog.Trigger>
+        <Dialog.Portal>
+              <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
+
+              <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10
+          text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+            rounded-lg min-w-[720px] shadow-lg shadow-black/25 flex flex-col justify-center align-center">
+                <div className="opacity-[0.75]">
+                  <img src={bannerUrl} />
+                </div>
+                
+              </Dialog.Content>
+            </Dialog.Portal>
+      </>
     )
 }
