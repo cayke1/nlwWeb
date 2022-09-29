@@ -1,5 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
+import { GameAdBanner } from "./GameAdBanner";
 interface GameBannerProps {
     id: string;
     bannerUrl: string;
@@ -7,7 +8,7 @@ interface GameBannerProps {
     adsCount: number;
 }
 
-interface GameAds {
+export interface GameAds {
   id: string,
   name: string,
   weekDays: [],
@@ -25,8 +26,7 @@ export function GameBanner ({bannerUrl, title, adsCount, id}: GameBannerProps) {
     fetch(`${import.meta.env.VITE_API_URL}/games/${id}/ads`)
     .then(response => response.json())
     .then(data => {
-      setGameAds(data)
-      console.log(data)
+      setGameAds(data);
     })
   }, []); 
     return (
@@ -43,9 +43,24 @@ export function GameBanner ({bannerUrl, title, adsCount, id}: GameBannerProps) {
 
               <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10
           text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-            rounded-lg min-w-[720px] shadow-lg shadow-black/25 flex flex-col justify-center align-center">
+            rounded-lg min-w-[720px] shadow-lg shadow-black/25 flex flex-row gap-40 align-center">
                 <div className="opacity-[0.75]">
                   <img src={bannerUrl} />
+                </div>
+                <div>
+                  {gameAds.map(gamead => {
+                    return (
+                      <GameAdBanner 
+                      id={gamead.id}
+                      name={gamead.name}
+                      weekDays={gamead.weekDays}
+                      useVoiceChannel={gamead.useVoiceChannel}
+                      yearsPlaying={gamead.yearsPlaying}
+                      hourStart={gamead.hourStart}
+                      hourEnd={gamead.hourEnd}
+                      />
+                    );
+                  })}
                 </div>
                 
               </Dialog.Content>
