@@ -7,7 +7,7 @@ import { DiscordConnect } from "./DiscordConnect";
 export function GameAdBanner (props : GameAds) {
 
     return (
-        <div  className="w-52 bg-[#1e1b25] rounded-lg p-5 align-center drop-shadow-2xl">
+        <div  className="w-52 bg-[#1e1b25] rounded-lg p-5 align-center drop-shadow-2xl mt-4">
             <DuoInfo label="Nome" value={props.name} />
             <DuoInfo label="Tempo de jogo" value={`${props.yearsPlaying} anos`} />
             <DuoInfo label="Disponibilidade" value={`${props.weekDays.length} dias \u2022 ${props.hourStart} - ${props.hourEnd}`} />
