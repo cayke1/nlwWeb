@@ -1,6 +1,8 @@
 import { GameAds } from "./GameBanner"
 import { DuoInfo } from './DuoInfo';
 import { GameController } from "phosphor-react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { DiscordConnect } from "./DiscordConnect";
 
 export function GameAdBanner (props : GameAds) {
 
@@ -15,13 +17,22 @@ export function GameAdBanner (props : GameAds) {
                     color={props.useVoiceChannel? '#34D399' : '#F87171'}
                     />
 
-                <button 
-                    type="submit"
-                    className="bg-violet-500 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600"
-                  >
-                    <GameController size={24}/>
-                    Conectar
-                  </button>
+            <Dialog.Root>
+                <Dialog.Trigger>
+                    <button 
+                        type="submit"
+                        className="bg-violet-500 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600"
+                    >
+                        <GameController size={24}/>
+                        Conectar
+                    </button>
+                  </Dialog.Trigger>
+
+                <Dialog.Content className="fixed bg-[#2A2634] text-white rounded-lg
+                 min-w-[311px] shadow-lg shadow-black/25 top-20 left-[-130%] px-8 py-10">
+                        <DiscordConnect id={props.id} />
+                </Dialog.Content>
+            </Dialog.Root>
         </div>
     )
 }
