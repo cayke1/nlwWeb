@@ -3,6 +3,7 @@ import { DuoInfo } from './DuoInfo';
 import { GameController } from "phosphor-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { DiscordConnect } from "./DiscordConnect";
+import { useState } from 'react';
 
 export function GameAdBanner (props : GameAds) {
 
@@ -27,11 +28,13 @@ export function GameAdBanner (props : GameAds) {
                         Conectar
                     </button>
                   </Dialog.Trigger>
-
+            <Dialog.Portal>
+                <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
                 <Dialog.Content className="fixed bg-[#2A2634] text-white rounded-lg
-                 min-w-[311px] shadow-lg shadow-black/25 top-20 left-[-130%] px-8 py-10">
+                 min-w-[311px] shadow-lg shadow-black/25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-8 py-10">
                         <DiscordConnect id={props.id} />
                 </Dialog.Content>
+            </Dialog.Portal>
             </Dialog.Root>
         </div>
     )
