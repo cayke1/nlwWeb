@@ -32,7 +32,12 @@ export function DiscordConnect({id}: DiscordConnectProps) {
 
             <p className="font-bold text-center text-lg mt-6">Adicione no Discord</p>
 
-            <div className="flex flex-row justify-center align-center gap-8 w-[231px] h-[48px] px-[11px] py-4 bg-zinc-900 rounded mt-2 text-center text-zinc-200">
+            <div 
+            className="flex flex-row justify-center align-center gap-8 
+            w-[231px] h-[48px] px-[11px] py-4 bg-zinc-900 rounded mt-2 text-center text-zinc-200 cursor-pointer"
+            onClick={() => {discordNick ? navigator.clipboard.writeText(discordNick?.discord) : alert("Discord nick unavailable")}}
+            title="Copy Discord"
+            >
                 <p className="text-lg">{discordNick ? discordNick.discord : "Não encontrado"}</p>
             </div>
             </div>
