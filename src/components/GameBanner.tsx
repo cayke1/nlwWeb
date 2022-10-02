@@ -43,9 +43,11 @@ export function GameBanner ({bannerUrl, title, adsCount, id}: GameBannerProps) {
 
               <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10
           text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-            rounded-lg min-w-[720px] max-h-[600px] overflow-y-auto scrollbar-thumb-gray-900 shadow-lg shadow-black/25 flex flex-row gap-40 align-center">
-                <div className="opacity-[0.75]">
-                  <img src={bannerUrl}/>
+            rounded-lg md:w-[720px] max-h-[600px] w-[480px] overflow-y-auto scrollbar-thumb-gray-900 shadow-lg shadow-black/25">
+              <h1 className="text-2xl font-bold mb-3 text-center">{title}</h1>
+              <div className=" flex flex-row gap-40 align-center justify-center">
+                <div className="opacity-[0.75] hidden md:block">
+                  <img src={bannerUrl} />
                 </div>
                 <div>
                   {gameAds.map(gamead => {
@@ -61,6 +63,7 @@ export function GameBanner ({bannerUrl, title, adsCount, id}: GameBannerProps) {
                       />
                     );
                   })}
+                </div>
                 </div>
                 
               </Dialog.Content>
