@@ -30,4 +30,5 @@ Install dependencies
 ```
 npm install or yarn
 ```
-And get fun
+Change the .env.example to .env and insert your api url. <a href="https://github.com/cayke1/nlwServer">See server here</a>
+And get fun!
